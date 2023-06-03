@@ -24,6 +24,11 @@ Modal.setAppElement('#__next');
 export default function Layout({ children, pagina }) {
 
   const { modal } = useQuiosco()
+
+  const shouldHideSidebar = pagina === 'Resumen' || pagina === 'Total y Confirmar Pedido';
+
+
+
   return (
     <>
       <Head>
@@ -32,9 +37,11 @@ export default function Layout({ children, pagina }) {
       </Head>
 
       <div className="md:flex">
-        <aside className="md:w-4/12 xl:w-1/4 2xl:1/5">
+
+        <aside className={`md:w-4/12 xl:w-1/4 2xl:1/5 ${shouldHideSidebar ? 'hidden md:block' : ''}`}>
           <Sidebar></Sidebar>
         </aside>
+
         <main className="md:w-8/12 xl:w-3/4 2xl:4/5 h-screen overflow-y-scroll">
           <Pasos />
           <div className="p-10">{children}</div>
